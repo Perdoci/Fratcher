@@ -24,16 +24,12 @@ public class AuthenticationService {
 
     public Boolean handleUserLogin(String email, String pass) {
 
-        //look if user exists
-        Boolean found = userService.findUserByEmailAndPass(email, pass);
-        if (found != null) {
-            return true;
-        }
-        return false;
+        return userService.findUserByEmailAndPass(email, pass);
     }
 
     public Boolean handleUserRegistration(String email, String pass, String status) {
 
+        //TODO look if user already exists
         Long statusId = null;
         User user = new User();
         user.setEmail(email);
