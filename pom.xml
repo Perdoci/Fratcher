@@ -16,8 +16,8 @@
         <java.version>1.8</java.version>
     </properties>
 
-    <groupId>com.micromata.webengineering</groupId>
-    <artifactId>demo</artifactId>
+    <groupId>uni.kassel.marsel.fratcher</groupId>
+    <artifactId>fratcher</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
