@@ -45,7 +45,7 @@ public class AuthenticationController {
         }
     }
 
-    @RequestMapping(value = "/login", method = POST)
+    @RequestMapping(value = "/api/login", method = POST)
     public ResponseEntity<Object> handleUserLogin(@RequestBody UserEmail userEmail) {
 
         String email = userEmail.getEmail();
@@ -58,7 +58,7 @@ public class AuthenticationController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value = "/register", method = POST)
+    @RequestMapping(value = "/api/register", method = POST)
     public ResponseEntity<Object> handleUserRegistration(@RequestBody UserEmailStatus userEmailStatus) {
 
         String email = userEmailStatus.getEmail();
