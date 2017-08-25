@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dserver.port=$PORT -Dspring.profiles.active=heroku,default -jar target/demoweb: java $JAVA_OPTS -Dserver.port=$PORT -Dspring.profiles.active=default,heroku -jar target/demo-1.0-SNAPSHOT.jar-1.0-SNAPSHOT.jar
+web: java $JAVA_OPTS -Dserver.port=$PORT -Dspring.profiles.active=default,heroku -jar target/demo-1.0-SNAPSHOT.jar
