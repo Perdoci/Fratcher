@@ -8,7 +8,7 @@ import uni.kassel.marsel.fratcher.message.Message;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity(name = "User_")
 public class User {
 
     @Id
@@ -18,7 +18,6 @@ public class User {
     private String email;
 
     private String password;
-
 
     public void setId(Long id) {
         this.id = id;
@@ -44,22 +43,12 @@ public class User {
         return password;
     }
 
-    /**
-     * Status has to be a pojo. Reason: when somebody likes a status
-     * we should get the owner of the status an ask the database if
-     * that owner also liked the current user. If so, we open the profile
-     * of the user with name email (pic) and the possibility to chat
-     * with him. If the owner had no action on the status of the current
-     * user than we just save the like with the id of the status owner.
-     */
+    public  User(){
 
-    /*
+    }
 
+    @OneToOne
     private Like like;
-
-    private Dislike dislike;
-
-    private List<Match> matchList;
 
     public void setLike(Like like) {
         this.like = like;
@@ -69,6 +58,9 @@ public class User {
         return like;
     }
 
+    @OneToOne
+    private Dislike dislike;
+
     public void setDislike(Dislike dislike) {
         this.dislike = dislike;
     }
@@ -77,19 +69,15 @@ public class User {
         return dislike;
     }
 
-    public void setMatchList(List<Match> matchList) {
-        this.matchList = matchList;
-    }
 
-    public List<Match> getMatchList() {
-        return matchList;
-    }
-    public void addToMatchList(Match match){
-        matchList.add(match);
-    }
-*/
-
-
+    /**
+     * Status has to be a pojo. Reason: when somebody likes a status
+     * we should get the owner of the status an ask the database if
+     * that owner also liked the current user. If so, we open the profile
+     * of the user with name email (pic) and the possibility to chat
+     * with him. If the owner had no action on the status of the current
+     * user than we just save the like with the id of the status owner.
+     */
 
     @Override
     public boolean equals(Object o) {

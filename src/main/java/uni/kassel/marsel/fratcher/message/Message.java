@@ -1,19 +1,18 @@
 package uni.kassel.marsel.fratcher.message;
 
-import uni.kassel.marsel.fratcher.matches.Match;
 import uni.kassel.marsel.fratcher.user.User;
-import uni.kassel.marsel.fratcher.user.UserStatus;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class Message {
     public static final int TEXT_LENGTH = 10240;
 
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @ManyToOne(optional = false)
     private User owner;
 
     private String text;

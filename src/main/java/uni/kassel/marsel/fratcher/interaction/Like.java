@@ -4,14 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Entity(name = "LikeStatus")
 public class Like {
 
-
+    @Id
+    @GeneratedValue
     private Long id;
-
-    private Long giver;
-
-    private Long taker;
 
     public void setId(Long id) {
         this.id = id;
@@ -20,6 +18,11 @@ public class Like {
     public Long getId() {
         return id;
     }
+
+    private Long giver;
+
+    private Long taker;
+
 
     public void setGiver(Long giver) {
         this.giver = giver;

@@ -4,18 +4,20 @@ import uni.kassel.marsel.fratcher.interaction.Like;
 import uni.kassel.marsel.fratcher.message.Message;
 import uni.kassel.marsel.fratcher.user.User;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class Match {
 
+    @Id
     private Long id;
 
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<User> users;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messageList;
 
     private Date timestamp;

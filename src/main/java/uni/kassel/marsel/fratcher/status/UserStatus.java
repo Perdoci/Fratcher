@@ -1,4 +1,6 @@
-package uni.kassel.marsel.fratcher.user;
+package uni.kassel.marsel.fratcher.status;
+
+import uni.kassel.marsel.fratcher.user.User;
 
 import javax.persistence.*;
 
@@ -15,6 +17,7 @@ public class UserStatus {
 
     @OneToOne
     private User owner;
+
 
     public void setId(Long id) {
         this.id = id;
