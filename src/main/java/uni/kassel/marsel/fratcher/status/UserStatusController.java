@@ -8,7 +8,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 public class UserStatusController {
-/*
+
     @Autowired
     private UserStatusService userStatusService;
 
@@ -17,5 +17,5 @@ public class UserStatusController {
         Iterable<UserStatus> allStatuses = userStatusService.getAllStatuses();
 
         return allStatuses;
-    }*/
+    }
 }

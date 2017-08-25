@@ -11,7 +11,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 public class AuthenticationController {
-/*
+
     @Autowired
     private AuthenticationService authenticationService;
 
@@ -70,5 +70,5 @@ public class AuthenticationController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }*/
+    }
 }
