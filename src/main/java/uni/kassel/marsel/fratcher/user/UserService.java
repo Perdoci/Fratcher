@@ -20,12 +20,17 @@ public class UserService {
 
     public User findUserByEmailAndPass(String email, String pass) {
 
-        User byEmailAndPassword = userRepo.findByEmailAndPassword(email, pass);
+        User byEmailAndPassword = userRepo.findByEmailAndUserPass(email, pass);
         return byEmailAndPassword;
 
     }
 
     public User getCurrentUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    public User findUserByEmail(String email) {
+        User byEmail= userRepo.findByEmail(email);
+        return byEmail;
     }
 }

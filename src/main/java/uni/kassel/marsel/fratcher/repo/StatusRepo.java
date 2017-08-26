@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface StatusRepo  extends CrudRepository<UserStatus, Long>{
 
-    @Query("SELECT s FROM UserStatus s WHERE s.id = 1")
+    @Query("SELECT s FROM UserStatus s")
     List<UserStatus> getAllStatuses();
 }

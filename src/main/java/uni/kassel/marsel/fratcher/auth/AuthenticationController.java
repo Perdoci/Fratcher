@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import uni.kassel.marsel.fratcher.status.UserStatusService;
 import uni.kassel.marsel.fratcher.user.User;
 import uni.kassel.marsel.fratcher.user.UserService;
 
@@ -17,6 +18,12 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationService authenticationService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserStatusService userStatusService;
 
 
     public static class UserEmail{
@@ -50,7 +57,7 @@ public class AuthenticationController {
         }
     }
 
-    @RequestMapping(value = "/filter/login", method = POST)
+    @RequestMapping(value = "/login", method = POST)
     public ResponseEntity<AuthenticationService.UserToken> handleUserLogin(@RequestBody UserEmail userEmail) {
 
         String email = userEmail.getEmail();
@@ -65,14 +72,19 @@ public class AuthenticationController {
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 
-    @RequestMapping(value = "/filter/register", method = POST)
+    @RequestMapping(value = "/register", method = POST)
     public ResponseEntity<Object> handleUserRegistration(@RequestBody UserEmailStatus userEmailStatus) {
 
+        Boolean saved = false;
         String email = userEmailStatus.getEmail();
         String pass = userEmailStatus.getPass();
         String status = userEmailStatus.getStatus();
+        User userByEmailAndPass = userService.findUserByEmail(email);
 
-        Boolean saved = authenticationService.handleUserRegistration(email, pass, status);
+        if(userByEmailAndPass == null){
+            saved = authenticationService.handleUserRegistration(email, pass, status);
+            userStatusService.setStatusOfUser(status,userService.findUserByEmailAndPass(email,pass) );
+        }
         if(saved){
             return new ResponseEntity<>(HttpStatus.OK);
         }

@@ -6,6 +6,8 @@ import uni.kassel.marsel.fratcher.user.User;
 
 public interface UserRepo extends CrudRepository<User, Long>{
 
-    User findByEmailAndPassword(@Param("email") String email,
-                                   @Param("password") String password);
+    User findByEmailAndUserPass(@Param("email") String email,
+                                   @Param("userPass") String password);
+
+    User findByEmail(@Param("email") String email);
 }

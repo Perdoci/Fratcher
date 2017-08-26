@@ -64,15 +64,13 @@ public class AuthenticationService {
         Long statusId = null;
         User user = new User();
         user.setEmail(email);
-        user.setPassword(pass);
+        user.setUserPass(pass);
         Long userId = userService.addUser(user);
-        if (userId != null) {
-            statusId = userStatusService.setStatusOfUser(status, user);
-        }
-        if (statusId != null) {
-            return true;
-        }
-        return false;
+
+       if(userId != null){
+           return true;
+       }
+       return false;
     }
 
     public Object parseToken(String jwtToken) {
