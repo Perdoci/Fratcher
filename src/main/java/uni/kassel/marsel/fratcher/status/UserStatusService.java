@@ -25,4 +25,9 @@ public class UserStatusService {
 
         return userStatus.getId();
     }
+
+    public UserStatus getStatusByID(Long id) {
+
+        return statusRepo.findUserStatusesById(id);
+    }
 }
