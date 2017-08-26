@@ -2,6 +2,7 @@ package uni.kassel.marsel.fratcher.matches;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uni.kassel.marsel.fratcher.message.Message;
 import uni.kassel.marsel.fratcher.repo.MatchRepo;
 import uni.kassel.marsel.fratcher.user.User;
 import uni.kassel.marsel.fratcher.user.UserService;
@@ -26,5 +27,22 @@ public class MatchService {
         match.addUser(user2);
 
         matchRepo.save(match);
+    }
+
+    public Boolean addMessage(Long matchId, Message message) {
+
+        Match match = matchRepo.findOne(matchId);
+
+        if (match == null) {
+            throw new IllegalArgumentException("Match not found. id=" + matchId);
+        }
+
+        match.addMessage(message);
+        matchRepo.save(match);
+
+        if(match.getId() != null){
+            return true;
+        }
+        return false;
     }
 }

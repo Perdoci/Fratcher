@@ -47,7 +47,9 @@ public class Match {
     }
 
     public void addUser(User user){
-        users = new ArrayList<>();
+        if(users == null){
+            users = new ArrayList<>();
+        }
         this.users.add(user);
     }
 
@@ -60,6 +62,9 @@ public class Match {
     }
 
     public void addMessage(Message message){
+        if(messageList == null){
+            messageList = new ArrayList<>();
+        }
         messageList.add(message);
     }
 

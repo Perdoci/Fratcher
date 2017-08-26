@@ -3,6 +3,7 @@ package uni.kassel.marsel.fratcher.message;
 import uni.kassel.marsel.fratcher.user.User;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Message {
@@ -16,6 +17,20 @@ public class Message {
     private User owner;
 
     private String text;
+
+    private Date timestamp;
+
+    public Message(){
+        this.timestamp = new Date(System.currentTimeMillis());
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
 
     public void setId(Long id) {
         this.id = id;
