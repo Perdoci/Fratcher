@@ -60,8 +60,6 @@ public class AuthenticationService {
 
     public Boolean handleUserRegistration(String email, String pass, String status) {
 
-        //TODO look if user already exists
-        Long statusId = null;
         User user = new User();
         user.setEmail(email);
         user.setUserPass(pass);

@@ -43,7 +43,7 @@ public class UserStatusController {
         return userStatus;
     }
 
-
+    //TODO add response statuses
     @RequestMapping(value = "/filter/status/{id}/like", method = POST)
     public  void addLiKe(@PathVariable Long id) {
 
@@ -52,10 +52,9 @@ public class UserStatusController {
     }
 
     @RequestMapping(value = "/filter/status/{id}/dislike", method = POST)
-    public UserStatus giveLive(@PathVariable Long id) {
-        // UserStatus userStatus = userStatusService.getStatusByID(id);
+    public void giveLive(@PathVariable Long id) {
 
-        return null;
+        dislikeService.addDislike(id);
     }
 
 
