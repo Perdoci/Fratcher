@@ -17,12 +17,10 @@ public class UserService {
         return user.getId();
     }
 
-    public Boolean findUserByEmailAndPass(String email, String pass) {
+    public User findUserByEmailAndPass(String email, String pass) {
 
-        User user = userRepo.findByEmailAndPassword(email, pass);
-        if(user != null){
-            return true;
-        }
-        return false;
+        User byEmailAndPassword = userRepo.findByEmailAndPassword(email, pass);
+        return byEmailAndPassword;
+
     }
 }

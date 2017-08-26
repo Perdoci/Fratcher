@@ -12,7 +12,7 @@ public class UserStatusController {
     @Autowired
     private UserStatusService userStatusService;
 
-    @RequestMapping(value = "/status", method = GET)
+    @RequestMapping(value = "/api/status", method = GET)
     public Iterable<UserStatus> getAllStatuses() {
         Iterable<UserStatus> allStatuses = userStatusService.getAllStatuses();
 
