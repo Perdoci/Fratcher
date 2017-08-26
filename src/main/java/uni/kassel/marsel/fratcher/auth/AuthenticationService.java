@@ -1,8 +1,6 @@
 package uni.kassel.marsel.fratcher.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import uni.kassel.marsel.fratcher.repo.UserRepo;
 import uni.kassel.marsel.fratcher.status.UserStatusService;
@@ -21,10 +19,21 @@ public class AuthenticationService {
     @Autowired
     private UserRepo userRepo;
 
+    public static class UserToken {
+        public User user;
+        public String token;
+    }
 
-    public Boolean handleUserLogin(String email, String pass) {
+    public UserToken handleUserLogin(String email, String pass) {
+        User user = userService.findUserByEmailAndPass(email, pass);
+        if(user!=null){
+            AuthenticationService.UserToken token = new AuthenticationService.UserToken();
+            token.user = user;
+            token.token = "<JWT-TOKEN>";
+            return token;
+        }
 
-        return userService.findUserByEmailAndPass(email, pass);
+        return null;
     }
 
     public Boolean handleUserRegistration(String email, String pass, String status) {
