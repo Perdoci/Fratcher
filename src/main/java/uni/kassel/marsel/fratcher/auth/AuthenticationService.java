@@ -2,7 +2,9 @@ package uni.kassel.marsel.fratcher.auth;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -14,8 +16,11 @@ import uni.kassel.marsel.fratcher.user.UserService;
 @Service
 public class AuthenticationService {
 
-    private String secret = "Severus Snape was a good guy!";
+    @Value("${authenticationService.jwt.secret}")
+    private String secret;
 
+    @Value("${authenticationService.salt}")
+    private String salt;
 
     @Autowired
     private UserService userService;
@@ -40,7 +45,8 @@ public class AuthenticationService {
 
 
     public UserToken handleUserLogin(String email, String pass) {
-        User user = userService.findUserByEmailAndPass(email, pass);
+        String hashedPassword = hashPassword(pass);
+        User user = userService.findUserByEmailAndPass(email, hashedPassword);
         if(user!=null){
             String secret = "Severus Snape was a good guy!";
             String token = Jwts.builder()
@@ -76,5 +82,16 @@ public class AuthenticationService {
                 .setSigningKey(secret)
                 .parse(jwtToken)
                 .getBody();
+    }
+
+    /**
+     * Return a password hashed with SHA-512.
+     *
+     * @param password plain text password
+     * @return hashed password
+     */
+    public String hashPassword(String   password) {
+        return DigestUtils.sha512Hex(salt + password);
+
     }
 }

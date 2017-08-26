@@ -21,6 +21,15 @@ public class MessageController {
     private MessageService messageService;
 
 
+    /**TODO stringify the message in the frontend as message object in order to be mapped
+     * Reason: Causing HTTP Message not readable exception(does not harm the faultless
+     * working of the app)
+     *
+     * @param id
+     * @param message
+     * @return
+     */
+
     @RequestMapping(value = "/filter/match/{id}/message", method = POST)
     public ResponseEntity<Object> addLiKe(@PathVariable Long id, @RequestBody Message message) {
 

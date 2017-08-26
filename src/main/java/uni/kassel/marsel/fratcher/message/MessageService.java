@@ -19,10 +19,10 @@ public class MessageService {
     private MessageRepo messageRepo;
 
 
-    public Boolean addMessage(Long matchId, Message newMessage) {
+    public Boolean addMessage(Long matchId, Message newText) {
 
         Message message = new Message();
-        message.setText(newMessage.getText());
+        message.setText(newText.getText());
         message.setOwner(userService.getCurrentUser());
         messageRepo.save(message);
 
