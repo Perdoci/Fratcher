@@ -26,7 +26,7 @@ public class DislikeService {
 
         Dislike dislikeFound = dislikeRepo.findDislikeByGiverAndTaker(dislikeGiver, dislikeTaker);
 
-        //if the like does't exist in the repo, we add it, otherwise we ignore it
+        //if the dislike does't exist in the repo, we add it, otherwise we ignore it
         if(dislikeFound == null && dislikeTaker != dislikeGiver){
             Dislike dislike = new Dislike();
             dislike.setTaker(dislikeTaker);

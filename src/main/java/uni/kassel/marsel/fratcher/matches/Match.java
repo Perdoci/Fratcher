@@ -5,6 +5,7 @@ import uni.kassel.marsel.fratcher.message.Message;
 import uni.kassel.marsel.fratcher.user.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
 public class Match {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -24,6 +26,8 @@ public class Match {
 
     public Match(){
         this.timestamp = new Date(System.currentTimeMillis());
+        //TODO check if array list is not a problem
+        this.messageList = new ArrayList<>();
     }
 
     public void setId(Long id) {
@@ -43,6 +47,7 @@ public class Match {
     }
 
     public void addUser(User user){
+        users = new ArrayList<>();
         this.users.add(user);
     }
 
