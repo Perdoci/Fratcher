@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uni.kassel.marsel.fratcher.interaction.Dislike;
+import uni.kassel.marsel.fratcher.interaction.DislikeService;
 import uni.kassel.marsel.fratcher.interaction.Like;
+import uni.kassel.marsel.fratcher.interaction.LikeService;
+import uni.kassel.marsel.fratcher.user.UserService;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -16,6 +19,15 @@ public class UserStatusController {
 
     @Autowired
     private UserStatusService userStatusService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private LikeService likeService;
+
+    @Autowired
+    private DislikeService dislikeService;
 
     @RequestMapping(value = "/filter/status", method = GET)
     public Iterable<UserStatus> getAllStatuses() {
@@ -33,14 +45,14 @@ public class UserStatusController {
 
 
     @RequestMapping(value = "/filter/status/{id}/like", method = POST)
-    public UserStatus giveLive(@PathVariable Long id, @RequestBody Like like) {
-       // UserStatus userStatus = userStatusService.getStatusByID(id);
+    public  void addLiKe(@PathVariable Long id) {
 
-        return null;
+        likeService.addLike(id);
+
     }
 
     @RequestMapping(value = "/filter/status/{id}/dislike", method = POST)
-    public UserStatus giveLive(@PathVariable Long id, @RequestBody Dislike dislike) {
+    public UserStatus giveLive(@PathVariable Long id) {
         // UserStatus userStatus = userStatusService.getStatusByID(id);
 
         return null;

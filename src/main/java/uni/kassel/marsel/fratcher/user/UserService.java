@@ -33,4 +33,8 @@ public class UserService {
         User byEmail= userRepo.findByEmail(email);
         return byEmail;
     }
+
+    public User findUserById(Long owner) {
+        return userRepo.findById(owner);
+    }
 }

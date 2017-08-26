@@ -12,5 +12,6 @@ public interface StatusRepo  extends CrudRepository<UserStatus, Long>{
     @Query("SELECT s FROM UserStatus s")
     List<UserStatus> getAllStatuses();
 
-    UserStatus findUserStatusesById(@Param("id") Long id);
+    List<UserStatus> findUserStatusById(@Param("id") Long id);
+
 }

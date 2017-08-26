@@ -10,4 +10,6 @@ public interface UserRepo extends CrudRepository<User, Long>{
                                    @Param("userPass") String password);
 
     User findByEmail(@Param("email") String email);
+
+    User findById(@Param("id") Long id);
 }
