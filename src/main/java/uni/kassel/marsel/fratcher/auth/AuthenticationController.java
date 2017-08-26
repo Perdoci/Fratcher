@@ -50,7 +50,7 @@ public class AuthenticationController {
         }
     }
 
-    @RequestMapping(value = "/api/login", method = POST)
+    @RequestMapping(value = "/filter/login", method = POST)
     public ResponseEntity<AuthenticationService.UserToken> handleUserLogin(@RequestBody UserEmail userEmail) {
 
         String email = userEmail.getEmail();
@@ -65,7 +65,7 @@ public class AuthenticationController {
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 
-    @RequestMapping(value = "/api/register", method = POST)
+    @RequestMapping(value = "/filter/register", method = POST)
     public ResponseEntity<Object> handleUserRegistration(@RequestBody UserEmailStatus userEmailStatus) {
 
         String email = userEmailStatus.getEmail();
