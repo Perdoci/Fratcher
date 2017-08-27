@@ -14,31 +14,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 public class MessageController {
 
-    @Autowired
-    private MatchService matchService;
+    //Empty for further implementation in the future.
+    //Features like deleting a message or answering a particular marked message
 
-    @Autowired
-    private MessageService messageService;
-
-
-    /**TODO stringify the message in the frontend as message object in order to be mapped
-     * Reason: Causing HTTP Message not readable exception(does not harm the faultless
-     * working of the app)
-     *
-     * @param id
-     * @param message
-     * @return
-     */
-
-    @RequestMapping(value = "/filter/match/{id}/message", method = POST)
-    public ResponseEntity<Object> addLiKe(@PathVariable Long id, @RequestBody Message message) {
-
-        Boolean added = messageService.addMessage(id, message);
-
-       if(added){
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
 }

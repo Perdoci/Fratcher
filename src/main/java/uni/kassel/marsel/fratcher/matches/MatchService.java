@@ -54,4 +54,12 @@ public class MatchService {
 
         return myMatches;
     }
+
+    public List<Message> getComments(Long id) {
+        Match matchById = matchRepo.findMatchById(id);
+        List<Message> messageList = matchById.getMessageList();
+
+        return messageList;
+    }
+
 }

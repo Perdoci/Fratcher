@@ -12,4 +12,6 @@ public interface MatchRepo extends CrudRepository<Match, Long>{
 
     @Query("SELECT p FROM Match p WHERE :user  MEMBER OF p.users")
     List<Match> findMyMatches(@Param("user") User user);
+
+    Match findMatchById(@Param("id") Long id);
 }
