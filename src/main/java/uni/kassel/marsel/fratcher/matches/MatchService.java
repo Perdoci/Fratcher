@@ -7,6 +7,8 @@ import uni.kassel.marsel.fratcher.repo.MatchRepo;
 import uni.kassel.marsel.fratcher.user.User;
 import uni.kassel.marsel.fratcher.user.UserService;
 
+import java.util.List;
+
 @Service
 public class MatchService {
 
@@ -44,5 +46,12 @@ public class MatchService {
             return true;
         }
         return false;
+    }
+
+    public List<Match> findMyMatches() {
+
+        List<Match> myMatches = matchRepo.findMyMatches(userService.getCurrentUser());
+
+        return myMatches;
     }
 }
