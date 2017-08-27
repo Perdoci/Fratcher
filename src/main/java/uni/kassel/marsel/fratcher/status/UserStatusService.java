@@ -2,7 +2,9 @@ package uni.kassel.marsel.fratcher.status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uni.kassel.marsel.fratcher.interaction.DislikeService;
 import uni.kassel.marsel.fratcher.interaction.Like;
+import uni.kassel.marsel.fratcher.interaction.LikeService;
 import uni.kassel.marsel.fratcher.repo.StatusRepo;
 import uni.kassel.marsel.fratcher.user.User;
 import uni.kassel.marsel.fratcher.user.UserService;
@@ -17,9 +19,33 @@ public class UserStatusService {
     @Autowired
     private UserService userService;
 
-    public Iterable<UserStatus> getAllStatuses() {
+    @Autowired
+    private LikeService likeService;
+
+    @Autowired
+    private DislikeService dislikeService;
+
+    public List<UserStatus> getAllStatusesForMe() {
         // LOG.info("Returning posts. user={}", userService.getCurrentUser().getEmail());
-        return statusRepo.getAllStatuses();
+
+        //owner id in the user status table is like the id of the user status itself
+        //due to one2one relation scheme
+        Long id = userService.getCurrentUser().getId();
+        //get the statuses without my status
+        List<UserStatus> allStatusesExceptMe = statusRepo.findUserStatusByIdIsNot(id);
+
+        //get all statuses I liked
+        List<UserStatus> statusesILiked = likeService.getStatusesILiked(id);
+
+        //get all statuses I disliked
+        List<UserStatus> statusesIDisliked = dislikeService.getStatusesIDisliked(id);
+
+        //remove the 2 latter results from the first and
+        //there are only statuses left with which i had no interaction with
+        allStatusesExceptMe.removeAll(statusesILiked);
+        allStatusesExceptMe.removeAll(statusesIDisliked);
+
+        return allStatusesExceptMe;
     }
 
 

@@ -30,8 +30,9 @@ public class UserStatusController {
     private DislikeService dislikeService;
 
     @RequestMapping(value = "/filter/status", method = GET)
-    public Iterable<UserStatus> getAllStatuses() {
-        Iterable<UserStatus> allStatuses = userStatusService.getAllStatuses();
+    public Iterable<UserStatus> getAllStatusesForMe() {
+        //retrieve the statuses I didn't like or dislike
+        Iterable<UserStatus> allStatuses = userStatusService.getAllStatusesForMe();
 
         return allStatuses;
     }
@@ -56,5 +57,7 @@ public class UserStatusController {
 
         dislikeService.addDislike(id);
     }
+
+
 
 }

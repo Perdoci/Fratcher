@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface StatusRepo  extends CrudRepository<UserStatus, Long>{
 
-    @Query("SELECT s FROM UserStatus s")
-    List<UserStatus> getAllStatuses();
+    List<UserStatus> findUserStatusByIdIsNot(@Param("id") Long id);
 
     List<UserStatus> findUserStatusById(@Param("id") Long id);
+
 
 }

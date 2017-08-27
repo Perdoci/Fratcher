@@ -14,4 +14,6 @@ public interface LikeRepo extends CrudRepository<Like, Long>{
 */
 
     Like findLikeByGiverAndTaker(@Param("giver") Long giver, @Param("taker") Long taker);
+
+    List<Like> findAllByGiver(@Param("giver") Long giver);
 }

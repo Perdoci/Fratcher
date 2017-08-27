@@ -43,12 +43,10 @@ public class AuthenticationService {
         SecurityContextHolder.getContext().setAuthentication(secAuth);
     }
 
-
     public UserToken handleUserLogin(String email, String pass) {
         String hashedPassword = hashPassword(pass);
         User user = userService.findUserByEmailAndPass(email, hashedPassword);
         if(user!=null){
-            String secret = "Severus Snape was a good guy!";
             String token = Jwts.builder()
                     .setSubject(email)
                     .setId(user.getId().toString())
@@ -58,6 +56,9 @@ public class AuthenticationService {
             UserToken userToken = new UserToken();
             userToken.user = user;
             userToken.token = token;
+
+            //set the logged in user as the current user
+            setUser(user.getId(), user.getEmail());
             return userToken;
         }
 

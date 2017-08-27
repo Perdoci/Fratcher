@@ -7,6 +7,9 @@ import uni.kassel.marsel.fratcher.status.UserStatus;
 import uni.kassel.marsel.fratcher.status.UserStatusService;
 import uni.kassel.marsel.fratcher.user.UserService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class DislikeService {
 
@@ -34,5 +37,18 @@ public class DislikeService {
             dislikeRepo.save(dislike);
         }
 
+    }
+
+    public List<UserStatus> getStatusesIDisliked(Long id) {
+        List<Dislike> statusesILiked = dislikeRepo.findAllByGiver(id);
+        List<UserStatus> userStatusesIDisliked = new ArrayList<>();
+
+        //for each liked status of me, search the
+        for (Dislike dislike: statusesILiked) {
+            Long taker = dislike.getTaker();
+            UserStatus statusByID = userStatusService.getStatusByID(taker);
+            userStatusesIDisliked.add(statusByID);
+        }
+        return userStatusesIDisliked;
     }
 }

@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uni.kassel.marsel.fratcher.matches.MatchService;
 import uni.kassel.marsel.fratcher.repo.LikeRepo;
+import uni.kassel.marsel.fratcher.status.UserStatus;
 import uni.kassel.marsel.fratcher.status.UserStatusService;
 import uni.kassel.marsel.fratcher.user.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,5 +49,18 @@ public class LikeService {
             }
         }
 
+    }
+
+    public List<UserStatus> getStatusesILiked(Long id) {
+        List<Like> statusesILiked = likeRepo.findAllByGiver(id);
+        List<UserStatus> userStatusesILiked = new ArrayList<>();
+
+        //for each liked status of me, search the
+        for (Like like: statusesILiked) {
+            Long taker = like.getTaker();
+            UserStatus statusByID = userStatusService.getStatusByID(taker);
+            userStatusesILiked.add(statusByID);
+        }
+        return userStatusesILiked;
     }
 }
