@@ -1,0 +1,37 @@
+{
+  "name": "Fratcher",
+  "version": "1.0.0",
+  "description": "Friend Matcher",
+  "main": "index.js",
+  "repository": "https://github.com/Perdoci/Fratcher",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "webpack -w"
+  },
+  "author": "Perdoci>",
+  "devDependencies": {
+    "babel-core": "6.24.1",
+    "babel-loader": "7.0.0-beta.1",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-react": "6.24.1",
+    "webpack": "2.4.1",
+    "copy-webpack-plugin": "4.0.1"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "i18next": "^8.4.2",
+    "i18next-xhr-backend": "^1.4.2",
+    "react": "15.5.4",
+    "react-bootstrap": "^0.31.0",
+    "react-cookie": "^2.0.7",
+    "react-dom": "^15.5.4",
+    "react-i18next": "^4.1.2",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
+    "universal-cookie": "^2.0.8"
+  }
+}

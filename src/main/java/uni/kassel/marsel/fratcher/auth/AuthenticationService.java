@@ -65,17 +65,18 @@ public class AuthenticationService {
         return null;
     }
 
-    public Boolean handleUserRegistration(String email, String pass, String status) {
+    public UserToken handleUserRegistration(String email, String pass, String status) {
 
         User user = new User();
         user.setEmail(email);
-        user.setUserPass(pass);
+        String hashedPassword = hashPassword(pass);
+        user.setUserPass(hashedPassword);
         Long userId = userService.addUser(user);
 
        if(userId != null){
-           return true;
+           return  handleUserLogin(email, pass);
        }
-       return false;
+       return null;
     }
 
     public Object parseToken(String jwtToken) {

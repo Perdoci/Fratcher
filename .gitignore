@@ -2,6 +2,9 @@
 *.iml
 .idea/
 target
-
+src/main/frontend/node_modules
+src/main/frontend/bundle.*
 *.mv.db
 *.trace.db
+
+npm-debug.log

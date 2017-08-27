@@ -73,21 +73,22 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/register", method = POST)
-    public ResponseEntity<Object> handleUserRegistration(@RequestBody UserEmailStatus userEmailStatus) {
+    public ResponseEntity<AuthenticationService.UserToken> handleUserRegistration(@RequestBody UserEmailStatus userEmailStatus) {
 
-        Boolean saved = false;
+        AuthenticationService.UserToken userToken = null;
         String email = userEmailStatus.getEmail();
         String pass = userEmailStatus.getPass();
         String status = userEmailStatus.getStatus();
         User userByEmailAndPass = userService.findUserByEmail(email);
 
         if(userByEmailAndPass == null){
-            saved = authenticationService.handleUserRegistration(email, pass, status);
+           userToken = authenticationService.handleUserRegistration(email, pass, status);
+
             userStatusService.setStatusOfUser(status,userService.findUserByEmailAndPass(email,pass) );
         }
-        if(saved){
-            return new ResponseEntity<>(HttpStatus.OK);
+        if(userToken != null){
+            return new ResponseEntity<>(userToken, HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
     }
 }
