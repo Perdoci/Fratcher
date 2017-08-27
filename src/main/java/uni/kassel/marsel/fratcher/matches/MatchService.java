@@ -62,4 +62,9 @@ public class MatchService {
         return messageList;
     }
 
+    public Match findMatchById(Long matchId) {
+        Match matchById = matchRepo.findMatchById(matchId);
+
+        return matchById;
+    }
 }
