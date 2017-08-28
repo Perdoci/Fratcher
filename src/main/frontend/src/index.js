@@ -8,6 +8,7 @@ import ReactDOM from "react-dom";
 import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import FindMatch from "./components/find-match";
 import Match from "./components/my-matches";
+import Chat from "./components/chat";
 
 class Root extends React.Component {
     constructor(props) {
@@ -43,9 +44,7 @@ class Root extends React.Component {
                    <Route path="/status/show" component={FindMatch}/>
                    <Route path="/match/show" component={Match}/>
 
-
-                    {/*Default route*/}
-                    {/*  <Route path="/" component={PostList}/>*/}
+                     <Route path="/match/chat/:id" component={Chat}/>
                 </Switch>
             </div>
         );

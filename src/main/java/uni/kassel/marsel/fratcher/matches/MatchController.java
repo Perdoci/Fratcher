@@ -24,30 +24,15 @@ public class MatchController {
     
     @RequestMapping(value = "/filter/match", method = GET)
     public  List<MatchService.MatchIdAndUser> getAllMatchesForMe() {
-  /*          List<Match> matches = new ArrayList<>();
-        Match match = new Match();
-        match.setId(12L);
-        Match match2 = new Match();
-        match2.setId(14L);
-        Match match3 = new Match();
-        match3.setId(15L);
-        matches.add(match);
-        matches.add(match2);
-        matches.add(match3);
-        return matches;*/
-        //get all my matches
+
       return matchService.findMyMatches();
     }
 
-    /**TODO stringify the message in the frontend as message object in order to be mapped
-     * Reason: Causing HTTP Message not readable exception(does not harm the faultless
-     * working of the app)
-     *
+    /**
      * @param id
      * @param message
      * @return
      */
-
     @RequestMapping(value = "/filter/match/{id}/message", method = POST)
     public ResponseEntity<Object> addMessage(@PathVariable Long id, @RequestBody Message message) {
 

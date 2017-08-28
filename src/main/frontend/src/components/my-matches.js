@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import {Link} from "react-router-dom";
 
 class Match extends React.Component {
     constructor(props) {
@@ -33,7 +34,8 @@ class Match extends React.Component {
         return this.state.matches.map((match => {
 
             return (
-                    <li key={match.id} >{match.email} </li>
+                    <li key={match.id} >
+                        <Link to={'/match/chat/'+ match.id}>{match.email} </Link>></li>
             );
         }));
 
