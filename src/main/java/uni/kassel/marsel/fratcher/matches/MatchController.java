@@ -3,10 +3,7 @@ package uni.kassel.marsel.fratcher.matches;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uni.kassel.marsel.fratcher.message.Message;
 import uni.kassel.marsel.fratcher.message.MessageService;
 
@@ -24,9 +21,9 @@ public class MatchController {
     @Autowired
     private MessageService messageService;
 
-
+    
     @RequestMapping(value = "/filter/match", method = GET)
-    public MatchService.MatchIdAndUser getAllMatchesForMe() {
+    public  List<MatchService.MatchIdAndUser> getAllMatchesForMe() {
   /*          List<Match> matches = new ArrayList<>();
         Match match = new Match();
         match.setId(12L);

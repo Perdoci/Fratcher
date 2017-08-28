@@ -29915,10 +29915,9 @@ var Match = function (_React$Component) {
     function Match(props) {
         _classCallCheck(this, Match);
 
-        var _this = _possibleConstructorReturn(this, (Match.__proto__ || Object.getPrototypeOf(Match)).call(this));
+        var _this = _possibleConstructorReturn(this, (Match.__proto__ || Object.getPrototypeOf(Match)).call(this, props));
 
         _this.state = {
-
             matches: []
         };
 
@@ -29928,18 +29927,9 @@ var Match = function (_React$Component) {
 
     _createClass(Match, [{
         key: "componentWillMount",
-        value: function componentWillMount() {}
-    }, {
-        key: "handleClick",
-        value: function handleClick(id) {
-            console.log("the id of the amtch clicked is" + id);
-        }
-    }, {
-        key: "handleClickTest",
-        value: function handleClickTest() {
+        value: function componentWillMount() {
             var _this2 = this;
 
-            console.log("the id of the amtch clicked is");
             _axios2.default.get('/filter/match').then(function (_ref) {
                 var data = _ref.data;
 
@@ -29949,32 +29939,29 @@ var Match = function (_React$Component) {
             });
         }
     }, {
+        key: "handleClick",
+        value: function handleClick(id) {}
+    }, {
+        key: "handleClickTest",
+        value: function handleClickTest() {}
+    }, {
         key: "renderPosts",
         value: function renderPosts() {
-            var _this3 = this;
 
-            console.log(("" + this.state.matches).substring(0, this.state.matches.indexOf('}') + 1));
+            return this.state.matches.map(function (x) {
 
-            console.log(JSON.stringify(this.state.matches));
-
-            return this.state.matches.map(function (match) {
                 return _react2.default.createElement(
-                    "tr",
-                    { key: match.id, onClick: function onClick() {
-                            return _this3.handleClick(match.id);
-                        } },
-                    _react2.default.createElement(
-                        "td",
-                        null,
-                        match.id
-                    )
+                    "li",
+                    { key: x.id },
+                    x.email,
+                    " "
                 );
             });
         }
     }, {
         key: "render",
         value: function render() {
-            var _this4 = this;
+            var _this3 = this;
 
             return _react2.default.createElement(
                 "div",
@@ -29988,7 +29975,7 @@ var Match = function (_React$Component) {
                         _react2.default.createElement(
                             "tr",
                             { onClick: function onClick() {
-                                    return _this4.handleClickTest();
+                                    return _this3.handleClickTest();
                                 } },
                             _react2.default.createElement(
                                 "th",

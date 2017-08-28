@@ -7,6 +7,7 @@ import uni.kassel.marsel.fratcher.repo.MatchRepo;
 import uni.kassel.marsel.fratcher.user.User;
 import uni.kassel.marsel.fratcher.user.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,11 +49,13 @@ public class MatchService {
         return false;
     }
 
-    public MatchIdAndUser findMyMatches() {
+    public List<MatchIdAndUser> findMyMatches() {
 
         List<Match> myMatches = matchRepo.findMyMatches(userService.getCurrentUser());
-        MatchIdAndUser matchIdAndUser = new MatchIdAndUser();
+        List<MatchIdAndUser> matches = new ArrayList<>();
         for (Match match: myMatches) {
+
+            MatchIdAndUser matchIdAndUser = new MatchIdAndUser();
             matchIdAndUser.id = match.getId();
 
             for (User user:  match.getUsers()) {
@@ -60,9 +63,10 @@ public class MatchService {
                     matchIdAndUser.email = user.getEmail();
                 }
             }
+            matches.add(matchIdAndUser);
         }
 
-        return matchIdAndUser;
+        return matches;
     }
 
     public List<Message> getComments(Long id) {

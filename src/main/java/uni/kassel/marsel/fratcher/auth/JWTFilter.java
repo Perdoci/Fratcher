@@ -51,6 +51,6 @@ public class JWTFilter extends GenericFilterBean {
             httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
 
-            filterChain.doFilter(request, response);
+         //   filterChain.doFilter(request, response);
     }
 }
