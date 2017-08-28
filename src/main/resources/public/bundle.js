@@ -29847,8 +29847,10 @@ module.exports = ReactDOMInvalidARIAHook;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _axios = __webpack_require__(25);
 
@@ -29867,15 +29869,111 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var FindMatch = function (_React$Component) {
-  _inherits(FindMatch, _React$Component);
+    _inherits(FindMatch, _React$Component);
 
-  function FindMatch() {
-    _classCallCheck(this, FindMatch);
+    function FindMatch(props) {
+        _classCallCheck(this, FindMatch);
 
-    return _possibleConstructorReturn(this, (FindMatch.__proto__ || Object.getPrototypeOf(FindMatch)).apply(this, arguments));
-  }
+        var _this = _possibleConstructorReturn(this, (FindMatch.__proto__ || Object.getPrototypeOf(FindMatch)).call(this, props));
 
-  return FindMatch;
+        _this.state = {
+            status: '',
+            id: ''
+
+        };
+        return _this;
+    }
+
+    _createClass(FindMatch, [{
+        key: "componentWillMount",
+        value: function componentWillMount() {
+            var _this2 = this;
+
+            _axios2.default.get('/filter/status').then(function (_ref) {
+                var data = _ref.data;
+
+                _this2.setState({
+                    status: data.status,
+                    id: data.id
+                });
+            });
+
+            console.log(this.state.id);
+        }
+    }, {
+        key: "handleLikeStatus",
+        value: function handleLikeStatus() {
+            var _this3 = this;
+
+            console.log(this.state.id);
+            var likeId = this.state.id;
+            _axios2.default.post('/filter/status/' + likeId + '/like').then(function () {
+                _this3.componentWillMount();
+            });
+        }
+    }, {
+        key: "handleDislikeStatus",
+        value: function handleDislikeStatus() {
+            var _this4 = this;
+
+            console.log(this.state.id);
+            var dislikeId = this.state.id;
+            _axios2.default.post('/filter/status/' + dislikeId + '/dislike').then(function () {
+                _this4.componentWillMount();
+            });
+        }
+    }, {
+        key: "handleClickTest",
+        value: function handleClickTest() {
+            var _this5 = this;
+
+            _axios2.default.get('/filter/status').then(function (_ref2) {
+                var data = _ref2.data;
+
+                _this5.setState({
+                    status: data.status,
+                    id: data.owner.id
+                });
+            });
+
+            console.log(this.state.id);
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            var _this6 = this;
+
+            return _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                    "div",
+                    { onClick: function onClick() {
+                            return _this6.handleClickTest();
+                        } },
+                    this.state.status,
+                    " "
+                ),
+                _react2.default.createElement("div", null),
+                _react2.default.createElement(
+                    "button",
+                    { type: "button", onClick: function onClick() {
+                            return _this6.handleLikeStatus();
+                        } },
+                    "Like"
+                ),
+                _react2.default.createElement(
+                    "button",
+                    { type: "button", onClick: function onClick() {
+                            return _this6.handleDislikeStatus();
+                        } },
+                    "Dislike"
+                )
+            );
+        }
+    }]);
+
+    return FindMatch;
 }(_react2.default.Component);
 
 exports.default = FindMatch;
@@ -29948,12 +30046,12 @@ var Match = function (_React$Component) {
         key: "renderPosts",
         value: function renderPosts() {
 
-            return this.state.matches.map(function (x) {
+            return this.state.matches.map(function (match) {
 
                 return _react2.default.createElement(
                     "li",
-                    { key: x.id },
-                    x.email,
+                    { key: match.id },
+                    match.email,
                     " "
                 );
             });
@@ -29981,16 +30079,6 @@ var Match = function (_React$Component) {
                                 "th",
                                 { className: "col-sm-2" },
                                 "Created at"
-                            ),
-                            _react2.default.createElement(
-                                "th",
-                                { className: "col-sm-8" },
-                                "Title"
-                            ),
-                            _react2.default.createElement(
-                                "th",
-                                { className: "col-sm-2" },
-                                "Author"
                             )
                         )
                     ),

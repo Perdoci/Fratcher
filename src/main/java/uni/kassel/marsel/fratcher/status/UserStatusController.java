@@ -29,9 +29,8 @@ public class UserStatusController {
     @RequestMapping(value = "/filter/status", method = GET)
     public UserStatus getOneStatusForMe() {
         //retrieve the statuses I didn't like or dislike
-        UserStatus allStatuses = userStatusService.getOneStatusForMe();
 
-        return allStatuses;
+        return userStatusService.getOneStatusForMe();
     }
 
     @RequestMapping(value = "/filter/status/{id}", method = GET)

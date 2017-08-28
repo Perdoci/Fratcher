@@ -73,8 +73,13 @@ public class UserStatusService {
         List<UserStatus> userstatus = statusRepo.findUserStatusById(id);
         User owner = userstatus.get(0).getOwner();
        // User userById = userService.findUserById(owner);
-        //  User owner = userstatus.getOwner();
+        //User owner = userstatus.getOwner();
         return owner.getId();
+    }
+
+    public static class StatusUserID {
+         public String status;
+         public Long owner;
     }
 
 }
