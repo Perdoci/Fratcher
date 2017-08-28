@@ -49,16 +49,11 @@ class Register extends React.Component {
                         User.setCookieCredentials(data);
                         this.setState({error: undefined});
 
-                        // Store authentication values even after refresh.
                         this.cookies.set('auth', {
                             token: data.token,
                             user: User
                         }, {path: '/'});
 
-                        // Send event of updated login state.
-                       // this.props.updateAuthentication();
-
-                        // Redirect to front page.
                         this.props.history.push("/");
                         break;
 
@@ -125,7 +120,7 @@ class Register extends React.Component {
                 <p/>
                 { this.state.error &&
                 <div className="alert alert-danger">
-                    Login was not successful.
+                    Registration was not successful.
                 </div>
                 }
             </div>

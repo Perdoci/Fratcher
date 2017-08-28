@@ -13,41 +13,35 @@ class Navigation extends React.Component {
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container">
                     <div className="navbar-header">
-                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#navbar">
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                        </button>
                         <Link to="/" ><img src="assets/fratcher-logo.png" width="140" alt="fratcher-logo"></img></Link>
                     </div>
                     <div id="navbar" className="collapse navbar-collapse">
 
                         <ul className="nav navbar-nav">
                             {User.isAuthenticated() &&
-                            <li><Link to="/">Play Match</Link></li>
+                            <li><Link to="/status/show " >Play Match</Link></li>
                             }
                         </ul>
 
                         <ul className="nav navbar-nav">
                             {User.isAuthenticated() &&
-                            < li > < Link to="/post/new">My Matches</Link></li>
+                            < li > < Link to="/match/show">My Matches</Link></li>
                             }
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             { User.isNotAuthenticated() &&
-                            <li><Link to="/login">Login</Link></li>
+                            <li><Link to="/user/login">Login</Link></li>
                             }
                             {
                                 User.isAuthenticated() &&
-                                <li><Link to="/login">
+                                <li><Link to="/user/login">
                                     {User.email}
                                 </Link></li>
                             }
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
                             { User.isNotAuthenticated() &&
-                            <li><Link to="/register">Register</Link></li>
+                            <li><Link to="/user/register">Register</Link></li>
                             }
 
                         </ul>

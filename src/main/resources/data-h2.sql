@@ -25,6 +25,7 @@ INSERT INTO USER_(ID, EMAIL, USER_PASS,LIKE_ID, DISLIKE_ID ) VALUES
   -- 5th pass: status-funf
   (5, 'cr7@gmx.de' , '141f8bc4146dfd8399c286f025b499452e56f72589d9aa8011448396445613d1f1e0e951d19c2643f5a8e12279485e4390be41e82791e65b94571a622f4bc98e', null, null);
 
+
 INSERT INTO USER_STATUS (ID, STATUS, OWNER_ID) VALUES
   (1, 'If I won the award for laziness, I would send somebody to pick it up for me.', 1 ),
   (2, 'Maybe if we tell people the brain is an app, they''ll start using it.',  2 ),

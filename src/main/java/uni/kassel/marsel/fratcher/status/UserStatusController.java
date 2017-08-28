@@ -2,16 +2,11 @@ package uni.kassel.marsel.fratcher.status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uni.kassel.marsel.fratcher.interaction.Dislike;
 import uni.kassel.marsel.fratcher.interaction.DislikeService;
-import uni.kassel.marsel.fratcher.interaction.Like;
 import uni.kassel.marsel.fratcher.interaction.LikeService;
 import uni.kassel.marsel.fratcher.user.UserService;
-
-import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -32,15 +27,15 @@ public class UserStatusController {
     private DislikeService dislikeService;
 
     @RequestMapping(value = "/filter/status", method = GET)
-    public List<UserStatus> getAllStatusesForMe() {
+    public UserStatus getOneStatusForMe() {
         //retrieve the statuses I didn't like or dislike
-        List<UserStatus> allStatuses = userStatusService.getAllStatusesForMe();
+        UserStatus allStatuses = userStatusService.getOneStatusForMe();
 
         return allStatuses;
     }
 
     @RequestMapping(value = "/filter/status/{id}", method = GET)
-    public UserStatus getAllStatuses(@PathVariable Long id) {
+    public UserStatus getStatusById(@PathVariable Long id) {
         UserStatus userStatus = userStatusService.getStatusByID(id);
 
         return userStatus;

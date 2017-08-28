@@ -6,6 +6,8 @@ import React from "react";
 import {CookiesProvider} from "react-cookie";
 import ReactDOM from "react-dom";
 import {HashRouter as Router, Route, Switch} from "react-router-dom";
+import FindMatch from "./components/find-match";
+import Match from "./components/my-matches";
 
 class Root extends React.Component {
     constructor(props) {
@@ -30,16 +32,16 @@ class Root extends React.Component {
                 <Switch>
                     {/*Authentication*/}
                     // See https://github.com/ReactTraining/react-router/issues/4627
-                    <Route path="/login"
+                    <Route path="/user/login"
                            render={(props) => (
                                <Authentication {...props} updateAuthentication={this.updateAuthentication}/> )}/>
-                    <Route path="/register" component={Register}/>
+                    <Route path="/user/register" component={Register}/>
 
                     {/*Post handling*/}
 
 
-                    {/*<Route path="/post/new" component={PostCreate}/>*/}
-                    {/*<Route path="/post/:id" component={PostDetail}/>*/}
+                   <Route path="/status/show" component={FindMatch}/>
+                   <Route path="/match/show" component={Match}/>
 
 
                     {/*Default route*/}
@@ -55,5 +57,6 @@ ReactDOM.render(
             <Router>
                 <Root />
             </Router>
+
     </CookiesProvider>
     , document.getElementById('root'));

@@ -48,11 +48,21 @@ public class MatchService {
         return false;
     }
 
-    public List<Match> findMyMatches() {
+    public MatchIdAndUser findMyMatches() {
 
         List<Match> myMatches = matchRepo.findMyMatches(userService.getCurrentUser());
+        MatchIdAndUser matchIdAndUser = new MatchIdAndUser();
+        for (Match match: myMatches) {
+            matchIdAndUser.id = match.getId();
 
-        return myMatches;
+            for (User user:  match.getUsers()) {
+                if(user.getId() != userService.getCurrentUser().getId()){
+                    matchIdAndUser.email = user.getEmail();
+                }
+            }
+        }
+
+        return matchIdAndUser;
     }
 
     public List<Message> getComments(Long id) {
@@ -66,5 +76,10 @@ public class MatchService {
         Match matchById = matchRepo.findMatchById(matchId);
 
         return matchById;
+    }
+
+    public static class MatchIdAndUser {
+        public Long id;
+        public String email;
     }
 }
