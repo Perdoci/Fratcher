@@ -6,11 +6,13 @@ class Chat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: this.props.match.params.id,
             messages: [],
-            send:''
+            send: ''
         }
 
         this.handleMessageChange = this.handleMessageChange.bind(this);
+        this.addMessage = this.addMessage.bind(this);
     }
 
     handleMessageChange(event) {
@@ -18,7 +20,7 @@ class Chat extends React.Component {
     }
 
     componentWillMount() {
-        axios.get('/filter/match/' + this.props.match.params.id)
+        axios.get('/filter/match/' + this.state.id)
             .then(({data}) => {
                 this.setState({
                     messages: data
@@ -26,43 +28,65 @@ class Chat extends React.Component {
             });
     }
 
-    renderMatches() {
+    renderMessages() {
+        if(this.state.messages.length !== 0) {
 
-        return this.state.messages.map((text => {
+            return this.state.messages.map((text => {
 
-            return (
-                <li key={text.id}  > {match.text} </li>
-            );
-        }));
+                return (
 
+                        <p key={text.id}> {text.text}</p>
+
+                );
+
+            }));
+
+        }
+        return null;
     }
 
-
+    addMessage() {
+        axios.post('/filter/match/' + this.state.id + '/message',
+            {
+                text: this.state.send,
+            }
+        )
+            .then(({data}) => {
+                this.setState({
+                    messages: data
+                });
+                this.componentWillMount();
+            });
+    }
 
 
     render() {
         return (
-            <div >
-                <table >
+            <div>
+                <table>
                     <thead>
                     <tr>
-                        <th >Messages</th>
+                        <th>Messages</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {this.renderMatches()}
-                    <div >
+                    <p>
+                    {this.renderMessages()}
+
+                    </p>
+                    <div>
                         <input type="text"
                                autoFocus={true}
                                onChange={this.handleMessageChange}/>
                     </div>
-                    <button type="button"  onClick={this.addMessage}>Send</button>
+                    <button type="button" onClick={this.addMessage}>Send</button>
                     </tbody>
                 </table>
+
             </div>
+
         );
     }
-
 }
 
 export default Chat;

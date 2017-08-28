@@ -8,3 +8,6 @@ src/main/frontend/bundle.*
 *.trace.db
 
 npm-debug.log
+src/main/resources/public
+
+src/test/

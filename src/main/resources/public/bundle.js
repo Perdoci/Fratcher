@@ -30147,11 +30147,13 @@ var Chat = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, props));
 
         _this.state = {
+            id: _this.props.match.params.id,
             messages: [],
             send: ''
         };
 
         _this.handleMessageChange = _this.handleMessageChange.bind(_this);
+        _this.addMessage = _this.addMessage.bind(_this);
         return _this;
     }
 
@@ -30165,7 +30167,7 @@ var Chat = function (_React$Component) {
         value: function componentWillMount() {
             var _this2 = this;
 
-            _axios2.default.get('/filter/match/' + this.props.match.params.id).then(function (_ref) {
+            _axios2.default.get('/filter/match/' + this.state.id).then(function (_ref) {
                 var data = _ref.data;
 
                 _this2.setState({
@@ -30174,18 +30176,36 @@ var Chat = function (_React$Component) {
             });
         }
     }, {
-        key: "renderMatches",
-        value: function renderMatches() {
+        key: "renderMessages",
+        value: function renderMessages() {
+            if (this.state.messages.length !== 0) {
 
-            return this.state.messages.map(function (text) {
+                return this.state.messages.map(function (text) {
 
-                return _react2.default.createElement(
-                    "li",
-                    { key: text.id },
-                    " ",
-                    match.text,
-                    " "
-                );
+                    return _react2.default.createElement(
+                        "p",
+                        { key: text.id },
+                        " ",
+                        text.text
+                    );
+                });
+            }
+            return null;
+        }
+    }, {
+        key: "addMessage",
+        value: function addMessage() {
+            var _this3 = this;
+
+            _axios2.default.post('/filter/match/' + this.state.id + '/message', {
+                text: this.state.send
+            }).then(function (_ref2) {
+                var data = _ref2.data;
+
+                _this3.setState({
+                    messages: data
+                });
+                _this3.componentWillMount();
             });
         }
     }, {
@@ -30213,7 +30233,11 @@ var Chat = function (_React$Component) {
                     _react2.default.createElement(
                         "tbody",
                         null,
-                        this.renderMatches(),
+                        _react2.default.createElement(
+                            "p",
+                            null,
+                            this.renderMessages()
+                        ),
                         _react2.default.createElement(
                             "div",
                             null,
