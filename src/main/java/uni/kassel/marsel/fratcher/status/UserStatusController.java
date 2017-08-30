@@ -30,7 +30,7 @@ public class UserStatusController {
     @RequestMapping(value = "/filter/status", method = GET)
     public UserStatus getOneStatusForMe() {
         //retrieve the statuses I didn't like or dislike
-
+        
         return userStatusService.getOneStatusForMe();
     }
 

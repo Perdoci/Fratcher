@@ -14,36 +14,48 @@ class FindMatch extends React.Component {
 
     componentWillMount(){
         axios.get('/filter/status').then(({data}) => {
-            this.setState({
-                status: data.status,
-                id: data.id
-            })
+            if(data !== null){
+                this.setState({
+                    status: data.status,
+                    id: data.id
+                })
+            }
+            this.noStatus();
         });
         this.gotMatch()
-        console.log(this.state.id);
-        console.log(this.state.match);
+    }
+
+    noStatus(){
+        if(this.state.status === undefined){
+            return(
+                <div>!!! No more statuses found. </div>
+            );
+        }
+        return null;
+
     }
 
 
     handleLikeStatus() {
         var likeId= this.state.id;
 
-        axios.post('/filter/status/'+likeId+'/like').then(({data}) => {
-            this.setState({
-                match: data.email
+        if(likeId !== undefined){
+            axios.post('/filter/status/'+likeId+'/like').then(({data}) => {
+                this.setState({
+                    match: data.email
                 })
-            this.componentWillMount();
-        });
-
+                this.componentWillMount();
+            });
+        }
     }
 
     handleDislikeStatus() {
-        console.log(this.state.id);
         var dislikeId= this.state.id;
-        axios.post('/filter/status/'+dislikeId+'/dislike').then(() => {
-            this.componentWillMount();
-        });
-
+        if(dislikeId !== undefined) {
+            axios.post('/filter/status/' + dislikeId + '/dislike').then(() => {
+                this.componentWillMount();
+            });
+        }
     }
 
     gotMatch(){
@@ -71,7 +83,7 @@ class FindMatch extends React.Component {
     render() {
         return (
             <div>
-              <div onClick={() => this.handleClickTest()}>{this.state.status} </div>
+              <div onClick={() => this.handleClickTest()}>{this.state.status} { this.noStatus()}</div>
                 <br></br><br></br>
                 <button type="button"  onClick={() => this.handleLikeStatus()}>Like</button>
                 <button type="button"  onClick={() => this.handleDislikeStatus()}>Dislike</button>

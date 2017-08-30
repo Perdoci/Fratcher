@@ -30,6 +30,6 @@ INSERT INTO USER_STATUS (ID, STATUS, OWNER_ID) VALUES
   (1, 'If I won the award for laziness, I would send somebody to pick it up for me.', 1 ),
   (2, 'Maybe if we tell people the brain is an app, they''ll start using it.',  2 ),
   (3, 'When you wake up at 6 in the morning, you close your eyes for 5 minutes and it''s already 6:45. When you''re at work and it''s 2:30, you close your eyes for 5 minutes and it''s 2:31.',  3 ),
-  (4, 'My room is like the Bermuda triangle, stuff goes in and is never seen again. - http://coolfunnyquotes.com ',  4 ),
+  (4, 'My room is like the Bermuda triangle, stuff goes in and is never seen again.  ',  4 ),
   (5, 'Life always offers you a second chance. It''s called tomorrow. ',  5 );
 

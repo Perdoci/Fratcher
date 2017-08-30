@@ -48,9 +48,12 @@ public class UserStatusService {
 
     private UserStatus getRandomStatusFromList(List<UserStatus> allStatusesExceptMe) {
         Random randomGenerator = new Random();
+        if (allStatusesExceptMe.size() != 0) {
         int index = randomGenerator.nextInt(allStatusesExceptMe.size());
-        UserStatus userStatus = allStatusesExceptMe.get(index);
-        return userStatus;
+            UserStatus userStatus = allStatusesExceptMe.get(index);
+            return userStatus;
+        }
+        return null;
     }
 
 
@@ -72,14 +75,14 @@ public class UserStatusService {
     public Long findStatusOwnerIdByStatusId(Long id) {
         List<UserStatus> userstatus = statusRepo.findUserStatusById(id);
         User owner = userstatus.get(0).getOwner();
-       // User userById = userService.findUserById(owner);
+        // User userById = userService.findUserById(owner);
         //User owner = userstatus.getOwner();
         return owner.getId();
     }
 
     public static class StatusUserID {
-         public String status;
-         public Long owner;
+        public String status;
+        public Long owner;
     }
 
 }

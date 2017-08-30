@@ -29897,14 +29897,27 @@ var FindMatch = function (_React$Component) {
             _axios2.default.get('/filter/status').then(function (_ref) {
                 var data = _ref.data;
 
-                _this2.setState({
-                    status: data.status,
-                    id: data.id
-                });
+                if (data !== null) {
+                    _this2.setState({
+                        status: data.status,
+                        id: data.id
+                    });
+                }
+                _this2.noStatus();
             });
             this.gotMatch();
-            console.log(this.state.id);
-            console.log(this.state.match);
+        }
+    }, {
+        key: "noStatus",
+        value: function noStatus() {
+            if (this.state.status === undefined) {
+                return _react2.default.createElement(
+                    "div",
+                    null,
+                    "!!! No more statuses found. "
+                );
+            }
+            return null;
         }
     }, {
         key: "handleLikeStatus",
@@ -29913,25 +29926,28 @@ var FindMatch = function (_React$Component) {
 
             var likeId = this.state.id;
 
-            _axios2.default.post('/filter/status/' + likeId + '/like').then(function (_ref2) {
-                var data = _ref2.data;
+            if (likeId !== undefined) {
+                _axios2.default.post('/filter/status/' + likeId + '/like').then(function (_ref2) {
+                    var data = _ref2.data;
 
-                _this3.setState({
-                    match: data.email
+                    _this3.setState({
+                        match: data.email
+                    });
+                    _this3.componentWillMount();
                 });
-                _this3.componentWillMount();
-            });
+            }
         }
     }, {
         key: "handleDislikeStatus",
         value: function handleDislikeStatus() {
             var _this4 = this;
 
-            console.log(this.state.id);
             var dislikeId = this.state.id;
-            _axios2.default.post('/filter/status/' + dislikeId + '/dislike').then(function () {
-                _this4.componentWillMount();
-            });
+            if (dislikeId !== undefined) {
+                _axios2.default.post('/filter/status/' + dislikeId + '/dislike').then(function () {
+                    _this4.componentWillMount();
+                });
+            }
         }
     }, {
         key: "gotMatch",
@@ -29976,7 +29992,8 @@ var FindMatch = function (_React$Component) {
                             return _this6.handleClickTest();
                         } },
                     this.state.status,
-                    " "
+                    " ",
+                    this.noStatus()
                 ),
                 _react2.default.createElement("br", null),
                 _react2.default.createElement("br", null),
