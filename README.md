@@ -3,7 +3,7 @@
 This project was build following the Web Engineering course at the University of Kassel. The idea was to build a web application
 including different technologies. 
 The concept of the app is as follows:
-Users should be able to register and login securely and get encoded tokens fro their activity inside the app. When a users is succesfully logged in, he can choose between options of finding a match or listening the matches he got. Finding a Match lists one random status from another anonymous user in the app. You can like/dislike the status. In each case you dont get to see the status anymore. If the othe user liked your status too, you get a match and you can see it by switching to the Match List. By clicking the match which is named after the email of the other user, you switch to a chat room and you can chat with each other.
+Users should be able to register and login securely and get encoded tokens from their activity inside the app. When a user is succesfully logged in, he can choose between the option of finding a match or listing the matches he got. "Finding a Match" lists one random status from another user in the app not showing other informatipn about that user. You can like/dislike the status. In each case you dont get to see the status anymore. If the other user liked your status too, you get a match and you can see it by switching to the Match List. By clicking the match which is named after the email of the other user, you switch to a chat room and you can chat with each other.
 
 ## Installation
 
