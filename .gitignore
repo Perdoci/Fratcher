@@ -11,3 +11,4 @@ npm-debug.log
 src/main/resources/public
 
 src/test/
+src/main/java/META-INF/

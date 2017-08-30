@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uni.kassel.marsel.fratcher.interaction.DislikeService;
 import uni.kassel.marsel.fratcher.interaction.LikeService;
+import uni.kassel.marsel.fratcher.user.User;
 import uni.kassel.marsel.fratcher.user.UserService;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -42,10 +43,9 @@ public class UserStatusController {
 
     //TODO add response statuses
     @RequestMapping(value = "/filter/status/{id}/like", method = POST)
-    public  void addLiKe(@PathVariable Long id) {
+    public User addLiKe(@PathVariable Long id) {
 
-        likeService.addLike(id);
-
+        return likeService.addLike(id);
     }
 
     @RequestMapping(value = "/filter/status/{id}/dislike", method = POST)

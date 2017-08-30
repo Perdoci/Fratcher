@@ -37,4 +37,8 @@ public class UserService {
     public User findUserById(Long owner) {
         return userRepo.findById(owner);
     }
+
+    public User getUserById(Long likeTaker) {
+        return userRepo.findById(likeTaker);
+    }
 }

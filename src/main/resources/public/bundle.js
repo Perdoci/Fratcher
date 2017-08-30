@@ -29883,8 +29883,8 @@ var FindMatch = function (_React$Component) {
 
         _this.state = {
             status: '',
-            id: ''
-
+            id: '',
+            match: ''
         };
         return _this;
     }
@@ -29902,17 +29902,23 @@ var FindMatch = function (_React$Component) {
                     id: data.id
                 });
             });
-
+            this.gotMatch();
             console.log(this.state.id);
+            console.log(this.state.match);
         }
     }, {
         key: "handleLikeStatus",
         value: function handleLikeStatus() {
             var _this3 = this;
 
-            console.log(this.state.id);
             var likeId = this.state.id;
-            _axios2.default.post('/filter/status/' + likeId + '/like').then(function () {
+
+            _axios2.default.post('/filter/status/' + likeId + '/like').then(function (_ref2) {
+                var data = _ref2.data;
+
+                _this3.setState({
+                    match: data.email
+                });
                 _this3.componentWillMount();
             });
         }
@@ -29928,12 +29934,25 @@ var FindMatch = function (_React$Component) {
             });
         }
     }, {
+        key: "gotMatch",
+        value: function gotMatch() {
+            if (this.state.match !== '' && this.state.match !== undefined) {
+                return _react2.default.createElement(
+                    "div",
+                    null,
+                    "You got a match with: ",
+                    this.state.match
+                );
+            }
+            return null;
+        }
+    }, {
         key: "handleClickTest",
         value: function handleClickTest() {
             var _this5 = this;
 
-            _axios2.default.get('/filter/status').then(function (_ref2) {
-                var data = _ref2.data;
+            _axios2.default.get('/filter/status').then(function (_ref3) {
+                var data = _ref3.data;
 
                 _this5.setState({
                     status: data.status,
@@ -29959,7 +29978,8 @@ var FindMatch = function (_React$Component) {
                     this.state.status,
                     " "
                 ),
-                _react2.default.createElement("div", null),
+                _react2.default.createElement("br", null),
+                _react2.default.createElement("br", null),
                 _react2.default.createElement(
                     "button",
                     { type: "button", onClick: function onClick() {
@@ -29973,6 +29993,13 @@ var FindMatch = function (_React$Component) {
                             return _this6.handleDislikeStatus();
                         } },
                     "Dislike"
+                ),
+                _react2.default.createElement("br", null),
+                _react2.default.createElement("br", null),
+                _react2.default.createElement(
+                    "div",
+                    null,
+                    this.gotMatch()
                 )
             );
         }
@@ -30090,7 +30117,7 @@ var Match = function (_React$Component) {
                             _react2.default.createElement(
                                 "th",
                                 { className: "col-sm-2" },
-                                "Created at"
+                                "Matches"
                             )
                         )
                     ),

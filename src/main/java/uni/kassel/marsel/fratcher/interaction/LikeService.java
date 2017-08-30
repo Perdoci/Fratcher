@@ -6,6 +6,7 @@ import uni.kassel.marsel.fratcher.matches.MatchService;
 import uni.kassel.marsel.fratcher.repo.LikeRepo;
 import uni.kassel.marsel.fratcher.status.UserStatus;
 import uni.kassel.marsel.fratcher.status.UserStatusService;
+import uni.kassel.marsel.fratcher.user.User;
 import uni.kassel.marsel.fratcher.user.UserService;
 
 import java.util.ArrayList;
@@ -26,9 +27,10 @@ public class LikeService {
     @Autowired
     private MatchService matchService;
 
-    public void addLike(Long id) {
+    public User addLike(Long id) {
 
         Long likeTaker = userStatusService.findStatusOwnerIdByStatusId(id);
+        User userLiked = userService.getUserById(likeTaker);
         Long likeGiver = userService.getCurrentUser().getId();
 
         Like likeFound = likeRepo.findLikeByGiverAndTaker(likeGiver, likeTaker);
@@ -46,9 +48,11 @@ public class LikeService {
             //create match
             if(reverseLike != null){
                 matchService.addMatch(likeGiver, likeTaker);
+                return userLiked;
+
             }
         }
-
+        return null;
     }
 
     public List<UserStatus> getStatusesILiked(Long id) {

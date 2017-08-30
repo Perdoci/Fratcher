@@ -48,8 +48,7 @@ class Match extends React.Component {
                 <table className="table table-hover">
                     <thead>
                     <tr onClick={() => this.handleClickTest()}>
-                        <th className="col-sm-2">Created at</th>
-
+                        <th className="col-sm-2">Matches</th>
                     </tr>
                     </thead>
                     <tbody>
