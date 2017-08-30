@@ -7,7 +7,7 @@ Users should be able to register and login securely and get encoded tokens fro t
 
 ## Installation
 
-1. Download and istall node.js from https://nodejs.org/en/
+1. Download and install node.js from https://nodejs.org/en/
 2. Go to the ./src/main/frontend directory and run
 ```
  npm install in
@@ -64,7 +64,12 @@ While editing the frontend components you "npm start" from the terminal to notif
 4. React 
 5. Axios
 
+## Structure
+![alt text](https://github.com/Perdoci/Fratcher/blob/master/src/main/frontend/assets/fratcher%20class%20diagram.PNG)
+
 ## Author
 
 Marsel Perdoci - marsel.perdoci@hotmail.com 
+
+
 
