@@ -65,7 +65,7 @@ While editing the frontend components you "npm start" from the terminal to notif
 5. Axios
 
 ## Structure
-![Alt text](/src/main/frontend/assets/fratcher class diagram.PNG?raw=true "Class model")
+![alt text](https://github.com/Perdoci/Fratcher/blob/master/src/main/frontend/assets/fratcher%20class%20diagram.PNG)
 
 ## Author
 
